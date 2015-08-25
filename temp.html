@@ -1,0 +1,24 @@
+
+
+After starting the Rails server, we can use Ctrl-C to shutdown server. <br>
+A common issue encountered by Rails developers is starting the Rails server and then accidentally closing the command line window in which it is running. <br>The Rails server is still running in the background, but with the command line window closed, you can no longer use Ctrl-C to shut it down. You could restart your computer, which kills all running processes. However, there is a better way, and we'll explore that in this assignment.
+<br>
+    Simulate losing track of your Rails server by starting it using the -d option:<br>
+    Terminal<br>
+
+    $ rails s -d<br>
+
+        Using -d option starts the Rails server as a daemon, a computer program that runs as a background process.<br>
+
+    Start your Rails server again. You will see an error message:<br>
+    Terminal<br>
+
+    $ A server is already running. Check [local path]/tmp/pids/server.pid.<br>
+    $ Exiting<br>
+
+    To kill the lost server, find its process id (PID) using the lsof command. lsof -i :3000 returns the PID of the process using port 3000 (the port Rails server uses).
+<br>
+    Now that you know the PID for your lost Rails server, terminate it using the kill -9 PID command using the PID we found with lsof.
+<br>
+Once you have completed the steps in this assignment, message your mentor with questions you have about the Rails server.<br> If you have questions about starting the server, stopping the server, server logs, PID, etc. be sure to discuss them with your mentor before moving to the next checkpoint.
+<br>
