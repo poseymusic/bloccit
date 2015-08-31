@@ -17,11 +17,20 @@ Comment.find_or_create_by!(body: 'A Stitch in Time')
 
 
 # Create Posts
+count = 1
 50.times do
-  Post.create!(
-    title:  RandomData.random_sentence,
-    body:   RandomData.random_paragraph
-  )
+  if count % 5 == 0
+    Post.create!(
+      title:  "CENSORED",
+      body:   RandomData.random_paragraph
+      )
+  else
+    Post.create!(
+      title:  RandomData.random_sentence,
+      body:   RandomData.random_paragraph
+      )
+  end
+  count += 1
 end
 posts = Post.all
 
