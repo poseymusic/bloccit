@@ -8,15 +8,18 @@
 include RandomData
 
 # post = Post.create([{title: "blah, blah", body: "blah, blah, blah" }])
-
+#=begin
+#
 Post.find_or_create_by!(title: 'A Stitch in Time') do |post|
   post.body = 'saves nine'
 end
 
 Comment.find_or_create_by!(body: 'A Stitch in Time')
 
-
+###################################
 # Create Posts
+#  Every 5th post is titled CENSORED
+##################################
 count = 1
 50.times do
   if count % 5 == 0
@@ -45,3 +48,26 @@ end
 puts "Seed finished"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
+#
+#=end
+#
+# advertisement = Advertisement.create([{title: "blah, blah", body: "blah, blah, blah" }])
+Advertisement.find_or_create_by!(title: "Budlight") do |ad|
+  ad.copy = "Your are up for Whatever"
+  ad.price = 500
+end
+
+##########################
+# Create Advertisement Seeds
+##########################
+10.times do
+    Advertisement.create!(
+      title:  RandomData.random_sentence,
+      copy:   RandomData.random_paragraph,
+      price:  75
+      )
+end
+posts = Advertisement.all
+
+puts "Advertisement Seed finished"
+puts "#{Advertisement.count} advertisements created"
