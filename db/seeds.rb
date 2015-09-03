@@ -14,7 +14,16 @@ Post.find_or_create_by!(title: 'A Stitch in Time') do |post|
   post.body = 'saves nine'
 end
 
-Comment.find_or_create_by!(body: 'A Stitch in Time')
+#Comment.find_or_create_by!(body: 'A Stitch in Time')
+
+# Create Topics
+15.times do
+  Topic.create!(
+    name:         RandomData.random_sentence,
+    description:  RandomData.random_paragraph
+  )
+end
+topics = Topic.all
 
 ###################################
 # Create Posts
@@ -24,11 +33,13 @@ count = 1
 50.times do
   if count % 5 == 0
     Post.create!(
+      topic:  topics.sample,
       title:  "CENSORED",
       body:   RandomData.random_paragraph
       )
   else
     Post.create!(
+      topic:  topics.sample,
       title:  RandomData.random_sentence,
       body:   RandomData.random_paragraph
       )
@@ -46,6 +57,7 @@ posts = Post.all
 end
 
 puts "Seed finished"
+puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
 #
