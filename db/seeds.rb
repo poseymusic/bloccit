@@ -15,15 +15,18 @@ Post.find_or_create_by!(title: 'A Stitch in Time') do |post|
 end
 
 #Comment.find_or_create_by!(body: 'A Stitch in Time')
+if Rails.env.development?
+  Topic.delete_all
 
-# Create Topics
-15.times do
-  Topic.create!(
-    name:         RandomData.random_sentence,
-    description:  RandomData.random_paragraph
-  )
+  # Create Topics
+  15.times do
+    Topic.create!(
+      name:         RandomData.random_sentence,
+      description:  RandomData.random_paragraph
+    )
+  end
+  topics = Topic.all
 end
-topics = Topic.all
 
 ###################################
 # Create Posts
