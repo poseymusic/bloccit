@@ -18,6 +18,11 @@ Rails.application.routes.draw do
      resources :posts, except: [:index]
      # get 'topics/:topic_id/posts', controller: 'posts', action: 'index'
      resources :sponsored_posts, except: [:index]
+    # get 'topics/:topic_id/sponsored_posts' => 'sponsored_posts#index', as: :topic_sponsored_posts
+    # topic_sponsored_posts_url(topic)
+    # => 'http://localhost:3000/topics/topic.id/sponsored_posts'
+    # link_to 'Text for the link', topic_sponsored_posts_url(@topic)
+    # => <a href='http://localhost:3000/topics/3/sponsored_posts'>Text for the link</a>
   end
 
   resources :questions
