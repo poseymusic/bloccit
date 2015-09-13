@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     # => <a href='http://localhost:3000/topics/3/sponsored_posts'>Text for the link</a>
   end
 
+  resources :users, only: [:new, :create]
+
   resources :questions
 
   get 'about' => 'welcome#about'
