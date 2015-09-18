@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
 #  get 'sponsored_posts/show'
-
 #  get 'sponsored_posts/new'
-
 #  get 'sponsored_posts/edit'
 
   resources :advertisements
@@ -26,6 +24,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:new, :create]
+  post 'users/confirm' => 'users#confirm'
 
   resources :questions
 
