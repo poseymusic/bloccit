@@ -10,56 +10,74 @@ include RandomData
 # post = Post.create([{title: "blah, blah", body: "blah, blah, blah" }])
 #=begin
 #
-Post.find_or_create_by!(title: 'A Stitch in Time') do |post|
-  post.body = 'saves nine'
-end
+
+# Create Users
+5.times do
+  user = User.create!(
+    name:     RandomData.random_name,
+    email:    RandomData.random_email,
+    password: RandomData.random_sentence
+    )
+  end
+users = User.all
+
+#################
+#Post.find_or_create_by!(title: 'A Stitch in Time') do |post|
+#  post.body = 'saves nine'
+#end
+#############
 
 #Comment.find_or_create_by!(body: 'A Stitch in Time')
-if Rails.env.development?
-  Topic.delete_all
+#if Rails.env.development?
+#
+# Topic.delete_all
 
   # Create Topics
   15.times do
-    Topic.create!(
+   topic =  Topic.create!(
       name:         RandomData.random_sentence,
       description:  RandomData.random_paragraph
     )
   end
   topics = Topic.all
-end
+#end
 
 ###################################
 # Create Posts
 #  Every 5th post is titled CENSORED
 ##################################
-count = 1
+#count = 1
+#50.times do
+#  if count % 5 == 0
+#    Post.create!(
+#      topic:  topics.sample,
+#      title:  "CENSORED",
+#      body:   RandomData.random_paragraph
+#      )
+#  else
 50.times do
-  if count % 5 == 0
-    Post.create!(
-      topic:  topics.sample,
-      title:  "CENSORED",
-      body:   RandomData.random_paragraph
-      )
-  else
-    Post.create!(
+    post = Post.create!(
+      user:   users.sample,
       topic:  topics.sample,
       title:  RandomData.random_sentence,
       body:   RandomData.random_paragraph
       )
+#  end
+#  count += 1
   end
-  count += 1
-end
 posts = Post.all
 
 # Create Comments
 100.times do
-  Comment.create!(
+  comment = Comment.create!(
     post: posts.sample,
     body: RandomData.random_paragraph
   )
 end
+comments = Comment.all
 
 puts "Seed finished"
+puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
@@ -67,22 +85,22 @@ puts "#{Comment.count} comments created"
 #=end
 #
 # advertisement = Advertisement.create([{title: "blah, blah", body: "blah, blah, blah" }])
-Advertisement.find_or_create_by!(title: "Budlight") do |ad|
-  ad.copy = "Your are up for Whatever"
-  ad.price = 500
-end
+#Advertisement.find_or_create_by!(title: "Budlight") do |ad|
+#  ad.copy = "Your are up for Whatever"
+#  ad.price = 500
 
 ##########################
 # Create Advertisement Seeds
 ##########################
-10.times do
-    Advertisement.create!(
-      title:  RandomData.random_sentence,
-      copy:   RandomData.random_paragraph,
-      price:  75
-      )
-end
-posts = Advertisement.all
+#10.times do
+#    Advertisement.create!(
+#      title:  RandomData.random_sentence,
+#      copy:   RandomData.random_paragraph,
+#      price:  75
+#      )
+#end
+#posts = Advertisement.all
 
-puts "Advertisement Seed finished"
-puts "#{Advertisement.count} advertisements created"
+#puts "Advertisement Seed finished"
+#puts "#{Advertisement.count} advertisements created"
+#end
