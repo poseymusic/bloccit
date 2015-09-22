@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
   has_many :posts
-  
+
   before_save { self.email = email.downcase }
+  before_save { self.role ||= :member }
 # before_save { self.name = name.downcase.split(" ").each { |f| f.capitalize! }.join(" ") }
   before_save :capitalize_name
 
@@ -14,6 +15,8 @@ class User < ActiveRecord::Base
              length: { minimum: 3, maximum: 100 } ,
              format: { with: EMAIL_REGEX }
   has_secure_password
+
+  enum role: [:member, :admin]
 
   def capitalize_name
     if name.present?
