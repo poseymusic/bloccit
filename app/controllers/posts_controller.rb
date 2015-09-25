@@ -13,12 +13,8 @@ class PostsController < ApplicationController
   end
 
   def create
-#    @post = Post.new
-    # raise params.inspect
-#    @post.title = params[:post][:title]
-#    @post.body  = params[:post][:body]
+  #### raise params.inspect
     @topic = Topic.find(params[:topic_id])
-#    @post.topic = @topic
     @post = @topic.posts.build(post_params)
     @post.user = current_user
     if @post.save
@@ -36,8 +32,6 @@ class PostsController < ApplicationController
 
   def update
     @post = Post.find(params[:id])
-#    @post.title = params[:post][:title]
-#    @post.body = params[:post][:body]
     @post.assign_attributes(post_params)
     if @post.save
       flash[:notice] = "Post was updated."
@@ -63,11 +57,11 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :body)
     end
-    
+
     def authorize_user
       post = Post.find(params[:id])
-      unless current_user == post.user || current_user.admin?
-        flash[:error] = "You must be an admin to do that."
+      unless current_user == post.user || current_user.admin? || current_user.moderator?
+        flash[:error] = "You must be an admin or moderator to do that."
         redirect_to [post.topic, post]
       end
     end

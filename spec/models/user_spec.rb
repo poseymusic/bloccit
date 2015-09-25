@@ -32,13 +32,14 @@ RSpec.describe User, type: :model do
     it "should respond to role" do
       expect(user).to respond_to(:role)
     end
-    # #2
     it "should respond to admin?" do
       expect(user).to respond_to(:admin?)
     end
-    # #3
     it "should respond to member?" do
       expect(user).to respond_to(:member?)
+    end
+    it "should respond to moderator?" do
+      expect(user).to respond_to(:moderator?)
     end
   end
 
@@ -59,11 +60,9 @@ RSpec.describe User, type: :model do
   end
 ########  tes  roles    #####
   describe "roles" do
-    #   #4
     it "should be member by default" do
       expect(user.role).to eql("member")
     end
-    # #5
   context "member user" do
     it "should return true for #member?" do
       expect(user.member?).to be_truthy
@@ -72,7 +71,6 @@ RSpec.describe User, type: :model do
       expect(user.admin?).to be_falsey
     end
   end
-# #6
   context "admin user" do
       before do
         user.admin!
@@ -82,6 +80,20 @@ RSpec.describe User, type: :model do
       end
       it "should return true for #admin?" do
         expect(user.admin?).to be_truthy
+      end
+    end
+  context "moderator user" do
+      before do
+        user.moderator!
+      end
+      it "should return false for #member?" do
+        expect(user.member?).to be_falsey
+      end
+      it "should return false for #admin?" do
+        expect(user.admin?).to be_falsey
+      end
+      it "should return true for #admin?" do
+        expect(user.moderator?).to be_truthy
       end
     end
   end
