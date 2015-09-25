@@ -15,16 +15,14 @@ Rails.application.routes.draw do
   # delete '/advertisements/:id' => 'advertisements#destroy'
 
   resources :topics do
-     resources :posts, except: [:index]
-     # get 'topics/:topic_id/posts', controller: 'posts', action: 'index'
+     resources :posts, except: [:index]     # get 'topics/:topic_id/posts', controller: 'posts', action: 'index'
      resources :sponsored_posts, except: [:index]
-    # get 'topics/:topic_id/sponsored_posts' => 'sponsored_posts#index', as: :topic_sponsored_posts
-    # topic_sponsored_posts_url(topic)
-    # => 'http://localhost:3000/topics/topic.id/sponsored_posts'
-    # link_to 'Text for the link', topic_sponsored_posts_url(@topic)
-    # => <a href='http://localhost:3000/topics/3/sponsored_posts'>Text for the link</a>
   end
 
+  resources :posts, only: [] do
+    resources :comments, only: [:create, :destroy]
+  end
+  
   resources :users, only: [:new, :create]
   resources :sessions, only: [:new, :create, :destroy]
 
