@@ -8,10 +8,10 @@ class Label < ActiveRecord::Base
       new_labels = []
       unless label_string.nil? || label_string.empty?
         label_string.split(",").each do |label|
-        label_name = label.strip
-        new_label = Label.find_or_create_by(name: label_name)
-        new_labels << new_label
-        end
+          label_name = label.strip
+          new_label = Label.find_or_create_by(name: label_name)
+          new_labels << new_label
+          end
       end
       new_labels
     end

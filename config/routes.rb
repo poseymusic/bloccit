@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   resources :labels, only: [:show]
+  resources :ratings, only: [:show]
 #  get 'sponsored_posts/show'
 
 #  get 'sponsored_posts/new'

@@ -4,6 +4,10 @@ class Post < ActiveRecord::Base
   has_many :comments, dependent: :destroy
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
+
+  has_many :rateables, as: :rateable
+  has_many :ratings, through: :rateables
+
   scope :order_desc, -> { order('created_at DESC') }
   validates :title, length: { minimum: 5 }, presence: true
   validates :body, length: { minimum: 20 }, presence: true
