@@ -1,0 +1,16 @@
+<div class="form-group">
+  <%#= render partial: 'ratings/form', locals: { f: f, topic: @topic, ratings: @post.ratings } %>
+    <%#= f.rating :ratings %>
+    <%#= f.text_field :ratings,
+                     class: 'form-control',
+
+                     value: ratings.map(&:severity).join(', ') %>
+
+
+  <%#= f.select( :ratings, ['PG', 'PG13', 'R']  )%>
+  <%#= f.select( :ratings, ['PG', 'PG13', 'R']  )%>
+ <%# end %>
+
+  <%= f.select :ratings, ['PG', 'PG13', 'R'] %>
+
+</div>
