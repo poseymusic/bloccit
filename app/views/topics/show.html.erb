@@ -19,8 +19,9 @@
     </p>
 
 <!--    <h2> Regular Posts:</h2>  -->
-    <% @topic.posts.order_desc.each do |post| %>
+    <% @topic.posts.order_rank.each do |post| %>
       <div class="media">
+        <%= render partial: 'votes/voter', locals: { post: post } %>
         <div class="media-body">
           <h4 class="media-heading">
             <%= link_to post.title, topic_post_path(@topic, post) %>

@@ -62,6 +62,8 @@ users = User.all
       title:  RandomData.random_sentence,
       body:   RandomData.random_paragraph
       )
+      post.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
+      rand(1..5).times { post.votes.create!(value: [-1, 1].sample, user: users.sample) }
 #  end
 #  count += 1
   end
@@ -71,7 +73,7 @@ posts = Post.all
 100.times do
   comment = Comment.create!(
     post: posts.sample,
-    user: users.sample,    
+    user: users.sample,
     body: RandomData.random_paragraph
   )
 end
@@ -116,6 +118,7 @@ puts "#{User.count} users created"
 puts "#{Topic.count} topics created"
 puts "#{Post.count} posts created"
 puts "#{Comment.count} comments created"
+puts "#{Vote.count} votes created"
 #
 #=end
 #
