@@ -5,6 +5,7 @@ class Post < ActiveRecord::Base
   has_many :votes, dependent: :destroy
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
+  after_create :create_vote
   #scope :order_desc, -> { order('created_at DESC') }
   scope :order_rank, ->  { order('rank DESC') }
   validates :title, length: { minimum: 5 }, presence: true
@@ -38,4 +39,9 @@ class Post < ActiveRecord::Base
   def self.order_by_reversed_created_at
     order('created_at ASC')
   end
+
+  private
+    def create_vote
+      user.votes.create(value: 1, post: self)
+    end
 end
