@@ -9,7 +9,6 @@ end
 # #2
 group :development do
   gem 'sqlite3'
-  gem 'pry-rails'
 end
 
 #gem 'pry-rails', :group => :development
@@ -17,6 +16,7 @@ end
 group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'shoulda-matchers'
+  gem 'pry-rails'
 end
 #add bootstrap
 gem 'bootstrap-sass'
