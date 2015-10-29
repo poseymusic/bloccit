@@ -55,6 +55,7 @@ RSpec.describe Post, type: :model do
 #
     describe "#create_vote" do
       it "sets the post up_votes to 1" do
+        # create a new post and test that it has 1 up vote
         expect(post.up_votes).to eql(4)
       end
       it "calls #create_vote when a post is created" do
