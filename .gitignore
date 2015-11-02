@@ -20,3 +20,6 @@
 project_doc.txt
 temp.html
 temp_data.rb
+
+# Ignore application configuration
+/config/application.yml
