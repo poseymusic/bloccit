@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
   has_many :labelings, as: :labelable
   has_many :labels, through: :labelings
   #scope :order_desc, -> { order('created_at DESC') }
+  after_create :create_favorite
   scope :order_rank, ->  { order('rank DESC') }
   validates :title, length: { minimum: 5 }, presence: true
   validates :body, length: { minimum: 20 }, presence: true
@@ -38,5 +39,10 @@ class Post < ActiveRecord::Base
 
   def self.order_by_reversed_created_at
     order('created_at ASC')
+  end
+
+  def create_favorite
+    Favorite.create(post: self, user: self.user)
+    FavoriteMailer.new_post(self).deliver_now
   end
 end
