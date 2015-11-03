@@ -4,9 +4,12 @@ include RandomData
 RSpec.describe Label, type: :model do
   it { should belong_to :labelable }
 
-  let(:topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
-  let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
-  let(:post) { topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user) }
+#  let(:topic) { Topic.create!(name: RandomData.random_sentence, description: RandomData.random_paragraph) }
+#  let(:user) { User.create!(name: "Bloccit User", email: "user@bloccit.com", password: "helloworld") }
+#  let(:post) { topic.posts.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, user: user) }
+  let(:topic) { create(:topic) }
+  let(:user)  { create(:user) }
+  let(:post)  { create(:post) }
   let(:label) { Label.create!(name: 'Label') }
   let(:label2) { Label.create!(name: 'Label2') }
 
@@ -25,7 +28,7 @@ RSpec.describe Label, type: :model do
       expect(topic_label).to eql(post_label)
     end
   end
-  
+
   describe ".update_labels" do
     it "takes a comma delimited string and returns an array of Labels" do
       labels = "#{label.name}, #{label2.name}"
